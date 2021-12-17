@@ -6,7 +6,7 @@ import static akka.http.javadsl.server.Directives.*;
 
 import static ru.bmstu.hadoop.labs.Constants.*;
 
-public class ServerRoute {
+public class ClientRoute {
 
 
     public Route createRoute() {
@@ -19,6 +19,5 @@ public class ServerRoute {
         );
     }
 
-    private 
 
 }

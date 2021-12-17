@@ -1,2 +1,4 @@
-package ru.bmstu.hadoop.labs;public class Node {
+package ru.bmstu.hadoop.labs;
+
+public class Node {
 }
