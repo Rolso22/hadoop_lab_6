@@ -41,7 +41,9 @@ public class HttpServer implements Watcher {
         final ActorMaterializer materializer = ActorMaterializer.create(system);
         storeActor = system.actorOf(Props.create(StoreActor.class));
 
-        ClientRoute serverRoute = new ClientRoute();
+        ZooServer zooServer = new ZooServer();
+
+        ServerRoute serverRoute = new ServerRoute();
         final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow = serverRoute.createRoute().flow(system, materializer);
         binding = http.bindAndHandle(
                 routeFlow,
