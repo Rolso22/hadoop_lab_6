@@ -13,11 +13,14 @@ public class ServerRoute {
         return route(
                 get(() -> parameter(URL, (url) ->
                         parameter(COUNT, (count) -> {
-
+                            routeHandler(url, Integer.parseInt(count))
                         }))
                 )
         );
     }
 
+    private Route routeHandler(String url, int count) {
+        
+    }
 
 }
