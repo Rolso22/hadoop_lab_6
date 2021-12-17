@@ -28,5 +28,6 @@ public class HttpServer implements Watcher {
 
     @Override
     public void process(WatchedEvent watchedEvent) {
+        System.out.println(watchedEvent.toString());
     }
 }
