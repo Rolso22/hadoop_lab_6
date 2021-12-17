@@ -18,7 +18,6 @@ public class ZooServer {
     private final int port;
     private final ZooKeeper zoo;
     private ActorRef storeActor;
-    private AsyncHttpClient httpClient = new As;
 
     public ZooServer(String path, String host, int port, ZooKeeper zoo, ActorRef storeActor) throws InterruptedException, KeeperException {
         this.path = path;
