@@ -31,7 +31,7 @@ public class ServerRoute {
         } else {
             response = sendRequest(url);
         }
-        return completeOKWithFuture(response.thenCompose(s -> s.getResponseBody()));
+        return completeOKWithFuture(response.thenApply(Response::getResponseBody));
     }
 
     private CompletionStage<Response> sendRequest(String url) {
