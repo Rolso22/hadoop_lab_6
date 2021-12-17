@@ -1,10 +1,6 @@
 package ru.bmstu.hadoop.labs;
 
-import org.apache.zookeeper.ZooKeeper;
-
 import java.io.IOException;
-
-import static ru.bmstu.hadoop.labs.Constants.*;
 
 public class AnonymizerApp {
     public static void main(String[] args) throws IOException {
@@ -17,5 +13,7 @@ public class AnonymizerApp {
         int port = Integer.parseInt(args[1]);
         HttpServer httpServer = new HttpServer(host, port);
         httpServer.start();
+        System.in.read();
+        httpServer.end();
     }
 }
