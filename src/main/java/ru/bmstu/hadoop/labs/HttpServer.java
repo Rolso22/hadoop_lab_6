@@ -42,7 +42,7 @@ public class HttpServer implements Watcher {
         storeActor = system.actorOf(Props.create(StoreActor.class));
 
         ServerRoute serverRoute = new ServerRoute();
-        final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow = route.createFlow();
+        final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow = serverRoute.createFlow();
         binding = http.bindAndHandle(
                 routeFlow,
                 ConnectHttp.toHost(DEFAULT_HOST, DEFAULT_PORT),
