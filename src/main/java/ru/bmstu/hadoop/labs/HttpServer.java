@@ -1,6 +1,7 @@
 package ru.bmstu.hadoop.labs;
 
 import akka.actor.ActorSystem;
+import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooKeeper;
 
 import java.io.IOException;
@@ -20,7 +21,11 @@ public class HttpServer {
     }
 
     public void start() throws IOException {
-        ZooKeeper zooKeeper = new ZooKeeper(DEFAULT_CONNECTION_HOST, TIME_OUT_MILLIS, this);
+        ZooKeeper zooKeeper = new ZooKeeper(DEFAULT_CONNECTION_HOST, TIME_OUT_MILLIS, this::getWatcher);
+    }
+
+    private Watcher getWatcher() {
+        
     }
 
 }
