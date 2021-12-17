@@ -7,4 +7,5 @@ public class Constants {
     public static String DEFAULT_HOST = "localhost";
     public static String SERVER_ONLINE = "Server online at http://localhost:";
     public static String URL = "url";
+    public static String COUNT = "count";
 }
