@@ -9,6 +9,7 @@ import org.asynchttpclient.*;
 import static org.asynchttpclient.Dsl.*;
 
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 import static ru.bmstu.hadoop.labs.Constants.*;
 
@@ -31,7 +32,8 @@ public class ZooServer {
         zoo.create(path + SLASH + host + port,
                 (host + COLON + port).getBytes(StandardCharsets.UTF_8),
                 ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL_SEQUENTIAL);
-        zoo.getChildren(path, )
+        List<String> serversList = zoo.getChildren(path, false);
+        storeActor.tell(serversList, ActorRef.noSender());
     }
 
 }
