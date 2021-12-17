@@ -20,7 +20,7 @@ public class ZooServer {
     }
 
     private void start() {
-        zoo.create(path + )
+        zoo.create(path + host + port, )
     }
 
 }
