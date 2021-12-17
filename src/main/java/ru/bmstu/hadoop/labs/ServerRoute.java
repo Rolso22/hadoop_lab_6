@@ -2,8 +2,8 @@ package ru.bmstu.hadoop.labs;
 
 import akka.http.javadsl.server.Route;
 import org.asynchttpclient.AsyncHttpClient;
+import org.asynchttpclient.Response;
 
-import javax.xml.ws.Response;
 import java.util.concurrent.CompletionStage;
 
 import static akka.http.javadsl.server.Directives.*;
@@ -25,16 +25,17 @@ public class ServerRoute {
     }
 
     private Route routeHandler(String url, int count) {
-        CompletionStage<Response> response;
+        CompletionStage<Response> response = null;
         if (count > 0) {
 
         } else {
             response = sendRequest(url);
         }
+        return completeOKWithFuture(response.thenCompose(s -> s.getResponseBody()));
     }
 
     private CompletionStage<Response> sendRequest(String url) {
-        httpClient.prepareGet(url).execute()
+        return httpClient.prepareGet(url).execute().toCompletableFuture();
     }
 
 }
