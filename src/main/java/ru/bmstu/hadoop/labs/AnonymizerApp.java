@@ -2,10 +2,12 @@ package ru.bmstu.hadoop.labs;
 
 import org.apache.zookeeper.ZooKeeper;
 
+import java.io.IOException;
+
 import static ru.bmstu.hadoop.labs.Constants.*;
 
 public class AnonymizerApp {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         if (args.length < 2) {
             System.out.println("need more arguments");
