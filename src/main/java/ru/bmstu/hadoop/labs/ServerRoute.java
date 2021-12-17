@@ -9,7 +9,7 @@ import akka.stream.javadsl.Flow;
 public class ServerRoute {
 
 
-    public Flow<HttpRequest, HttpResponse, NotUsed> createFlow() {
+    public Route createRoute() {
 
     }
 }
