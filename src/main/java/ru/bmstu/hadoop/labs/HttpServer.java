@@ -2,6 +2,7 @@ package ru.bmstu.hadoop.labs;
 
 import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
+import akka.actor.Props;
 import akka.http.javadsl.Http;
 import akka.stream.ActorMaterializer;
 import org.apache.zookeeper.WatchedEvent;
@@ -30,7 +31,8 @@ public class HttpServer implements Watcher {
 
         final Http http = Http.get(system);
         final ActorMaterializer materializer = ActorMaterializer.create(system);
-
+        storeActor = system.actorOf(Props.create(StoreActor.class));
+        
     }
 
     public void end() throws InterruptedException {
