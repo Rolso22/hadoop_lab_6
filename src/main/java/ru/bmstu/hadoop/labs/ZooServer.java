@@ -5,6 +5,8 @@ import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.ZooDefs;
 import org.apache.zookeeper.ZooKeeper;
+import org.asynchttpclient.*;
+import static org.asynchttpclient.Dsl.*;
 
 import java.nio.charset.StandardCharsets;
 
@@ -16,7 +18,7 @@ public class ZooServer {
     private final int port;
     private final ZooKeeper zoo;
     private ActorRef storeActor;
-    private AsyncHttp
+    private AsyncHttpClient httpClient;
 
     public ZooServer(String path, String host, int port, ZooKeeper zoo, ActorRef storeActor) throws InterruptedException, KeeperException {
         this.path = path;
