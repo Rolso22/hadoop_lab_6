@@ -22,11 +22,11 @@ public class HttpServer implements Watcher {
     }
 
     public void start() throws IOException {
-        ZooKeeper zooKeeper = new ZooKeeper(DEFAULT_CONNECTION_HOST, TIME_OUT_MILLIS, this::getWatcher);
+        ZooKeeper zooKeeper = new ZooKeeper(DEFAULT_CONNECTION_HOST, TIME_OUT_MILLIS, this);
     }
 
     @Override
     public void process(WatchedEvent watchedEvent) {
-
+        
     }
 }
