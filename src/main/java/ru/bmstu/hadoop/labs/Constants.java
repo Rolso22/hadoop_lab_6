@@ -8,5 +8,5 @@ public class Constants {
     public static String SERVER_ONLINE = "Server online at http://localhost:";
     public static String URL = "url";
     public static String COUNT = "count";
-    public static String SERVER_PATH = "servers";
+    public static String SERVER_PATH = "/servers";
 }
