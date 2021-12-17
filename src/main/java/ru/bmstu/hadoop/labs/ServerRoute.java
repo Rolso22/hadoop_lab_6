@@ -25,9 +25,9 @@ public class ServerRoute {
     public Route createRoute() {
         return route(
                 get(() -> parameter(URL, (url) ->
-                        parameter(COUNT, (count) -> {
+                        parameter(COUNT, (count) ->
                             routeHandler(url, Integer.parseInt(count))
-                        }))
+                        ))
                 )
         );
     }
@@ -49,6 +49,5 @@ public class ServerRoute {
     private CompletionStage<Response> sendToServer(String url, int count) {
         return Patterns.ask(storeActor, new GetServer(), Duration.ofMillis(TIME_OUT_MILLIS))
                 .thenCompose(answer -> sendRequest((String) answer));
-    }
-
+    } // TODO
 }
