@@ -14,6 +14,6 @@ public class AnonymizerApp {
         String host = args[0];
         int port = Integer.parseInt(args[1]);
         HttpServer httpServer = new HttpServer(host, port);
-        ZooKeeper zooKeeper = new ZooKeeper(DEFAULT_CONNECTION_HOST, TIME_OUT_MILLIS, );
+        httpServer.start();
     }
 }
