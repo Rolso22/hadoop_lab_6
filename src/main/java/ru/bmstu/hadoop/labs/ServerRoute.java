@@ -13,6 +13,8 @@ public class ServerRoute {
 
     public Route createRoute() {
         return route(
-                get(() -> parameter("", (url))))
+                get(() -> parameter("", (url) -> {
+                    
+                })))
     }
 }
