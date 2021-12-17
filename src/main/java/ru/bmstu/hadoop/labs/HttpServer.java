@@ -7,8 +7,7 @@ import org.apache.zookeeper.ZooKeeper;
 
 import java.io.IOException;
 
-import static ru.bmstu.hadoop.labs.Constants.DEFAULT_CONNECTION_HOST;
-import static ru.bmstu.hadoop.labs.Constants.TIME_OUT_MILLIS;
+import static ru.bmstu.hadoop.labs.Constants.*;
 
 public class HttpServer implements Watcher {
     private String host;
