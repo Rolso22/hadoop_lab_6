@@ -44,7 +44,7 @@ public class HttpServer implements Watcher {
 
         ZooServer zooServer = new ZooServer(SERVER_PATH, host, port, zooKeeper, storeActor);
 
-        ServerRoute serverRoute = new ServerRoute();
+        ServerRoute serverRoute = new ServerRoute(storeActor);
         final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow = serverRoute.createRoute().flow(system, materializer);
         binding = http.bindAndHandle(
                 routeFlow,
