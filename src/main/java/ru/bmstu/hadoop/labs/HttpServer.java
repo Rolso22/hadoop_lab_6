@@ -26,6 +26,7 @@ public class HttpServer implements Watcher {
     private ActorSystem system;
     private ActorRef storeActor;
     private ZooKeeper zooKeeper;
+    private CompletionStage<ServerBinding> binding;
 
     public HttpServer(String host, int port) {
         this.host = host;
@@ -40,16 +41,20 @@ public class HttpServer implements Watcher {
         final ActorMaterializer materializer = ActorMaterializer.create(system);
         storeActor = system.actorOf(Props.create(StoreActor.class));
 
+        ServerRoute serverRoute = new ServerRoute();
         final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow = route.createFlow();
-        final CompletionStage<ServerBinding> binding = http.bindAndHandle(
+        binding = http.bindAndHandle(
                 routeFlow,
                 ConnectHttp.toHost(DEFAULT_HOST, DEFAULT_PORT),
                 materializer
         );
+        System.out.println(SERVER_ONLINE + DEFAULT_PORT);
     }
 
     public void end() throws InterruptedException {
         zooKeeper.close();
+        binding.thenCompose(ServerBinding::unbind)
+                .thenAccept(unbound -> system.terminate());
     }
 
     @Override
