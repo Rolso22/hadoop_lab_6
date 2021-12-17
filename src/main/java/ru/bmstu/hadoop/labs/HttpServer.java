@@ -23,7 +23,7 @@ public class HttpServer implements Watcher {
 
     public void start() throws IOException {
         ZooKeeper zooKeeper = new ZooKeeper(DEFAULT_CONNECTION_HOST, TIME_OUT_MILLIS, this);
-
+        
     }
 
     public void end() {
