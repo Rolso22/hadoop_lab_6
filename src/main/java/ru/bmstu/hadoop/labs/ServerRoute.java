@@ -34,7 +34,7 @@ public class ServerRoute {
     }
 
     private CompletionStage<Response> sendRequest(String url) {
-        
+        httpClient.prepare(url)
     }
 
 }
