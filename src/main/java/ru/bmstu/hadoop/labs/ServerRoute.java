@@ -25,17 +25,21 @@ public class ServerRoute {
     }
 
     private Route routeHandler(String url, int count) {
-        CompletionStage<Response> response = null;
+        CompletionStage<Response> response;
         if (count > 0) {
-
+            response = sendToServer(url, count - 1);
         } else {
             response = sendRequest(url);
         }
-        return completeOKWithFuture(response.thenApply(Response::getResponseBody));
+        return completeOKWithFutureString(response.thenApply(Response::getResponseBody));
     }
 
     private CompletionStage<Response> sendRequest(String url) {
         return httpClient.prepareGet(url).execute().toCompletableFuture();
+    }
+
+    private CompletionStage<Response> sendToServer(String url, int count) {
+
     }
 
 }
