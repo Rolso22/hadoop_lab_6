@@ -1,9 +1,11 @@
 package ru.bmstu.hadoop.labs;
 
+import org.apache.zookeeper.KeeperException;
+
 import java.io.IOException;
 
 public class AnonymizerApp {
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static void main(String[] args) throws IOException, InterruptedException, KeeperException {
 
         if (args.length < 2) {
             System.out.println("need more arguments");

@@ -11,6 +11,7 @@ import akka.http.javadsl.model.HttpRequest;
 import akka.http.javadsl.model.HttpResponse;
 import akka.stream.ActorMaterializer;
 import akka.stream.javadsl.Flow;
+import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooKeeper;
@@ -34,7 +35,7 @@ public class HttpServer implements Watcher {
         system = ActorSystem.create("HttpServer");
     }
 
-    public void start() throws IOException {
+    public void start() throws IOException, InterruptedException, KeeperException {
         zooKeeper = new ZooKeeper(DEFAULT_CONNECTION_HOST, TIME_OUT_MILLIS, this);
 
         final Http http = Http.get(system);

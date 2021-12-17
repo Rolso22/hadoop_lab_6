@@ -1,6 +1,9 @@
 package ru.bmstu.hadoop.labs;
 
 import akka.actor.ActorRef;
+import org.apache.zookeeper.CreateMode;
+import org.apache.zookeeper.KeeperException;
+import org.apache.zookeeper.ZooDefs;
 import org.apache.zookeeper.ZooKeeper;
 
 import java.nio.charset.StandardCharsets;
@@ -14,7 +17,7 @@ public class ZooServer {
     private ZooKeeper zoo;
     private ActorRef storeActor;
 
-    public ZooServer(String path, String host, int port, ZooKeeper zoo, ActorRef storeActor) {
+    public ZooServer(String path, String host, int port, ZooKeeper zoo, ActorRef storeActor) throws InterruptedException, KeeperException {
         this.path = path;
         this.host = host;
         this.port = port;
@@ -23,8 +26,11 @@ public class ZooServer {
         start();
     }
 
-    private void start() {
-        zoo.create(path + SLASH + host + port, (host + COLON + port).getBytes(StandardCharsets.UTF_8), )
+    private void start() throws InterruptedException, KeeperException {
+        zoo.create(path + SLASH + host + port,
+                (host + COLON + port).getBytes(StandardCharsets.UTF_8),
+                ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL_SEQUENTIAL);
+        
     }
 
 }
