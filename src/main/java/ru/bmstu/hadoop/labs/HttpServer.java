@@ -41,6 +41,8 @@ public class HttpServer implements Watcher {
         final ActorMaterializer materializer = ActorMaterializer.create(system);
         storeActor = system.actorOf(Props.create(StoreActor.class));
 
+        
+
         ClientRoute serverRoute = new ClientRoute();
         final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow = serverRoute.createRoute().flow(system, materializer);
         binding = http.bindAndHandle(
