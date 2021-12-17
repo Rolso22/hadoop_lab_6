@@ -9,7 +9,11 @@ public class ZooServer {
         this.path = path;
         this.host = host;
         this.port = port;
+        start();
     }
 
+    private void start() {
+        
+    }
 
 }
