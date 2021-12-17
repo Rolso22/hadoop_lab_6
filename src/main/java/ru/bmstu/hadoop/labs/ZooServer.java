@@ -16,10 +16,11 @@ public class ZooServer {
         this.port = port;
         this.zoo = zoo;
         this.storeActor = storeActor;
+        start();
     }
 
     private void start() {
-
+        zoo.create(path + )
     }
 
 }
