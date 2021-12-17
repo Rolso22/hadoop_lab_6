@@ -3,7 +3,11 @@ package ru.bmstu.hadoop.labs;
 import java.util.List;
 
 public class PutServers {
-    private List<String> serversList;
+    private final List<String> serversList;
+
+    public List<String> getServersList() {
+        return serversList;
+    }
 
     public PutServers(List<String> serversList) {
         this.serversList = serversList;

@@ -15,13 +15,17 @@ public class StoreActor extends AbstractActor {
     public Receive createReceive() {
         return ReceiveBuilder.create()
                 .match(GetServer.class, this::getRandomServer)
-                .match()
+                .match(PutServers.class, this::putServers)
                 .build();
     }
 
     private void getRandomServer(GetServer get) {
         int randomServer = random.nextInt(serversList.size());
         sender().tell(serversList.get(randomServer), ActorRef.noSender());
+    }
+
+    private void putServers(PutServers list) {
+        
     }
 
 }

@@ -33,7 +33,7 @@ public class ZooServer {
                 (host + COLON + port).getBytes(StandardCharsets.UTF_8),
                 ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL_SEQUENTIAL);
         List<String> serversList = zoo.getChildren(path, false);
-        storeActor.tell(serversList, ActorRef.noSender());
+        storeActor.tell(new PutServers(serversList), ActorRef.noSender());
     }
 
 }
