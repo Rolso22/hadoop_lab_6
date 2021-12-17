@@ -13,6 +13,6 @@ public class AnonymizerApp {
         }
         String host = args[0];
         int port = Integer.parseInt(args[1]);
-        ZooKeeper zooKeeper = new ZooKeeper(DEFAULT_CONNECTION_HOST, )
+        ZooKeeper zooKeeper = new ZooKeeper(DEFAULT_CONNECTION_HOST, TIME_OUT_MILLIS, )
     }
 }
