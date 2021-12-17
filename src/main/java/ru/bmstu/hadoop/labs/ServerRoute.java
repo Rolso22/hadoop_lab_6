@@ -23,10 +23,16 @@ public class ServerRoute {
     }
 
     private Route routeHandler(String url, int count) {
-        CompletionStage<Response> responce;
+        CompletionStage<Response> response;
         if (count > 0) {
-            
+
+        } else {
+            response = sendRequest(url);
         }
+    }
+
+    private CompletionStage<Response> sendRequest(String url) {
+
     }
 
 }
