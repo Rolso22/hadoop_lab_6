@@ -3,6 +3,8 @@ package ru.bmstu.hadoop.labs;
 import akka.actor.ActorSystem;
 import org.apache.zookeeper.ZooKeeper;
 
+import java.io.IOException;
+
 import static ru.bmstu.hadoop.labs.Constants.DEFAULT_CONNECTION_HOST;
 import static ru.bmstu.hadoop.labs.Constants.TIME_OUT_MILLIS;
 
@@ -17,7 +19,7 @@ public class HttpServer {
         system = ActorSystem.create("HttpServer");
     }
 
-    public void start() {
+    public void start() throws IOException {
         ZooKeeper zooKeeper = new ZooKeeper(DEFAULT_CONNECTION_HOST, TIME_OUT_MILLIS, this);
     }
 
