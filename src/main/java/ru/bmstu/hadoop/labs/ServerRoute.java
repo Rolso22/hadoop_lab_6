@@ -48,6 +48,8 @@ public class ServerRoute {
 
     private CompletionStage<Response> sendToServer(String url, int count) {
         return Patterns.ask(storeActor, new GetServer(), Duration.ofMillis(TIME_OUT_MILLIS))
-                .thenCompose(answer -> sendRequest((String) answer));
-    } // TODO
+                .thenCompose(answer -> {
+
+                });
+    }
 }
