@@ -13,6 +13,7 @@ public class HttpServer implements Watcher {
     private String host;
     private int port;
     private ActorSystem system;
+    private ZooKeeper zooKeeper;
 
     public HttpServer(String host, int port) {
         this.host = host;
@@ -21,12 +22,12 @@ public class HttpServer implements Watcher {
     }
 
     public void start() throws IOException {
-        ZooKeeper zooKeeper = new ZooKeeper(DEFAULT_CONNECTION_HOST, TIME_OUT_MILLIS, this);
-
+        zooKeeper = new ZooKeeper(DEFAULT_CONNECTION_HOST, TIME_OUT_MILLIS, this);
+        
     }
 
-    public void end() {
-
+    public void end() throws InterruptedException {
+        zooKeeper.close();
     }
 
     @Override

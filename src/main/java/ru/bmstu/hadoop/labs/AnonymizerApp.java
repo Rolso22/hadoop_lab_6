@@ -3,7 +3,7 @@ package ru.bmstu.hadoop.labs;
 import java.io.IOException;
 
 public class AnonymizerApp {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
 
         if (args.length < 2) {
             System.out.println("need more arguments");
