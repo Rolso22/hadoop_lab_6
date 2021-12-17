@@ -2,6 +2,8 @@ package ru.bmstu.hadoop.labs;
 
 import org.apache.zookeeper.ZooKeeper;
 
+import static ru.bmstu.hadoop.labs.Constants.*;
+
 public class AnonymizerApp {
     public static void main(String[] args) {
 
@@ -11,6 +13,6 @@ public class AnonymizerApp {
         }
         String host = args[0];
         int port = Integer.parseInt(args[1]);
-        ZooKeeper zooKeeper = new ZooKeeper()
+        ZooKeeper zooKeeper = new ZooKeeper(DEFAULT_CONNECTION_HOST, )
     }
 }
