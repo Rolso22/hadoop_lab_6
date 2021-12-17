@@ -11,10 +11,10 @@ import java.nio.charset.StandardCharsets;
 import static ru.bmstu.hadoop.labs.Constants.*;
 
 public class ZooServer {
-    private String path;
-    private String host;
-    private int port;
-    private ZooKeeper zoo;
+    private final String path;
+    private final String host;
+    private final int port;
+    private final ZooKeeper zoo;
     private ActorRef storeActor;
 
     public ZooServer(String path, String host, int port, ZooKeeper zoo, ActorRef storeActor) throws InterruptedException, KeeperException {
@@ -30,7 +30,6 @@ public class ZooServer {
         zoo.create(path + SLASH + host + port,
                 (host + COLON + port).getBytes(StandardCharsets.UTF_8),
                 ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL_SEQUENTIAL);
-        
     }
 
 }
