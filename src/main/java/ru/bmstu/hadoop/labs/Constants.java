@@ -9,4 +9,5 @@ public class Constants {
     public static String URL = "url";
     public static String COUNT = "count";
     public static String SERVER_PATH = "/servers";
+    public static String SLASH = "/";
 }

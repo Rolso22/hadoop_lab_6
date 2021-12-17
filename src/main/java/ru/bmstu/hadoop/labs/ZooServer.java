@@ -3,6 +3,8 @@ package ru.bmstu.hadoop.labs;
 import akka.actor.ActorRef;
 import org.apache.zookeeper.ZooKeeper;
 
+import static ru.bmstu.hadoop.labs.Constants.*;
+
 public class ZooServer {
     private String path;
     private String host;
@@ -20,7 +22,7 @@ public class ZooServer {
     }
 
     private void start() {
-        zoo.create(path + host + port, )
+        zoo.create(path + SLASH + host + port, host + )
     }
 
 }
