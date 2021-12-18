@@ -32,7 +32,7 @@ public class ZooServer {
         System.out.println("HERE " + path + SLASH + host + port);
         zoo.create(path + SLASH + host + port,
                 (host + COLON + port).getBytes(StandardCharsets.UTF_8),
-                ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL_SEQUENTIAL);
+                ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL);
         List<String> serversList = zoo.getChildren(path, false);
         System.out.println("list: " + serversList);
         storeActor.tell(new PutServers(serversList), ActorRef.noSender());
