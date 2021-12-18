@@ -25,7 +25,7 @@ public class StoreActor extends AbstractActor {
     }
 
     private void putServers(PutServers list) {
-        System.out.println("list: " + list);
+        //System.out.println("list: " + list.getServersList());
         serversList.addAll(list.getServersList());
     }
 
