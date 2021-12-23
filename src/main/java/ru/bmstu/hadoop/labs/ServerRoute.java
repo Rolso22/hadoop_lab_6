@@ -1,7 +1,6 @@
 package ru.bmstu.hadoop.labs;
 
 import akka.actor.ActorRef;
-import akka.http.javadsl.Http;
 import akka.http.javadsl.server.Route;
 import akka.pattern.Patterns;
 import org.asynchttpclient.AsyncHttpClient;
@@ -19,9 +18,11 @@ import static ru.bmstu.hadoop.labs.Constants.*;
 public class ServerRoute {
     private final AsyncHttpClient httpClient = asyncHttpClient();
     private final ActorRef storeActor;
+    private final String self_path;
 
-    public ServerRoute(ActorRef storeActor) {
+    public ServerRoute(ActorRef storeActor, String self_path) {
         this.storeActor = storeActor;
+        this.self_path = self_path;
     }
 
     public Route createRoute() {
@@ -57,7 +58,7 @@ public class ServerRoute {
     }
 
     private CompletionStage<Response> sendToServer(String url, int count) {
-        return Patterns.ask(storeActor, new GetServer(), Duration.ofMillis(TIME_OUT_MILLIS))
+        return Patterns.ask(storeActor, new GetServer(self_path), Duration.ofMillis(TIME_OUT_MILLIS))
                 .thenCompose(answer -> sendRequest(buildRequest((String) answer, url, count)));
     }
 }

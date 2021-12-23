@@ -39,7 +39,7 @@ public class HttpServer {
         ZooServer zooServer = new ZooServer(SERVER_PATH, host, port, storeActor);
         zooServer.start();
 
-        ServerRoute serverRoute = new ServerRoute(storeActor);
+        ServerRoute serverRoute = new ServerRoute(storeActor, host + port);
         final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow = serverRoute.createRoute().flow(system, materializer);
         binding = http.bindAndHandle(
                 routeFlow,
