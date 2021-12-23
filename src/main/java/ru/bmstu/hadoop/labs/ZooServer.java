@@ -30,7 +30,7 @@ public class ZooServer implements Watcher {
         zoo.create(path + SLASH + host + COLON + port,
                 (host + COLON + port).getBytes(StandardCharsets.UTF_8),
                 ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL);
-        List<String> serversList = zoo.getChildren(path, false);
+        List<String> serversList = zoo.getChildren(path, this);
         System.out.println("list: " + serversList);
         storeActor.tell(new PutServers(serversList), ActorRef.noSender());
     }
