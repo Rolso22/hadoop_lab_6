@@ -33,7 +33,6 @@ public class ServerRoute {
     }
 
     private Route routeHandler(String url, int count) {
-        System.out.println("url: " + url);
         CompletionStage<Response> response;
         if (count > 0) {
             response = sendToServer(url, count - 1);
@@ -44,9 +43,11 @@ public class ServerRoute {
     }
 
     private CompletionStage<Response> sendRequest(String url) {
-        //url = "http://" + url;
-        System.out.println("send url: " + url);
         return httpClient.prepareGet(url).execute().toCompletableFuture();
+    }
+
+    private String buildRequest(String url, int count) {
+        
     }
 
     private CompletionStage<Response> sendToServer(String url, int count) {
