@@ -33,6 +33,7 @@ public class ServerRoute {
     }
 
     private Route routeHandler(String url, int count) {
+        System.out.println("url: " + url);
         CompletionStage<Response> response;
         if (count > 0) {
             response = sendToServer(url, count - 1);
