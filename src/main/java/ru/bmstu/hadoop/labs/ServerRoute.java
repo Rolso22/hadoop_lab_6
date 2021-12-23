@@ -39,18 +39,18 @@ public class ServerRoute {
         if (count > 0) {
             response = sendToServer(url, count - 1);
         } else {
-            response = sendRequest(url);
+            response = sendRequest(httpClient.prepareGet(url).build());
         }
         return completeOKWithFutureString(response.thenApply(Response::getResponseBody));
     }
 
-    private CompletionStage<Response> sendRequest(String path) {
+    private CompletionStage<Response> sendRequest(Request path) {
         System.out.println("send url: " + path);
-        return httpClient.executeRequest(httpClient.prepareGet(path)).toCompletableFuture();
+        return httpClient.executeRequest(path).toCompletableFuture();
     }
 
     private Request buildRequest(String path, String url, int count) {
-        Request result = httpClient.prepareGet("http://" + path)
+        Request result = httpClient.prepareGet(path)
                 .addQueryParam(URL, url)
                 .addQueryParam(COUNT, String.valueOf(count)).build();
         System.out.println("result: " + result);
