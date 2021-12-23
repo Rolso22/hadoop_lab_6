@@ -44,9 +44,9 @@ public class ServerRoute {
         return completeOKWithFutureString(response.thenApply(Response::getResponseBody));
     }
 
-    private CompletionStage<Response> sendRequest(Request url) {
-        System.out.println("send url: " + url);
-        return httpClient.prepareGet(url).execute().toCompletableFuture();
+    private CompletionStage<Response> sendRequest(String path) {
+        System.out.println("send url: " + path);
+        return httpClient.executeRequest(path).toCompletableFuture();
     }
 
     private Request buildRequest(String path, String url, int count) {
