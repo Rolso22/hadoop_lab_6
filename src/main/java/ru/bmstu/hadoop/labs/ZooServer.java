@@ -37,10 +37,13 @@ public class ZooServer implements Watcher {
 
     @Override
     public void process(WatchedEvent watchedEvent) {
+        List<String> serversList = null;
         try {
-            System.out.println(zoo.getChildren(path, false));
+            serversList = zoo.getChildren(path, false);
         } catch (KeeperException | InterruptedException e) {
             e.printStackTrace();
         }
+        storeActor.tell(new PutServers(serversList), ActorRef.noSender());
+
     }
 }
