@@ -43,7 +43,6 @@ public class ZooServer implements Watcher {
         } catch (KeeperException | InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println("serversList: " + serversList);
         storeActor.tell(new PutServers(serversList), ActorRef.noSender());
     }
 }
