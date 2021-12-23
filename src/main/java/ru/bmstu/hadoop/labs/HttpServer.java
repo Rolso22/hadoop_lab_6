@@ -52,7 +52,7 @@ public class HttpServer implements Watcher {
                 ConnectHttp.toHost(host, port),
                 materializer
         );
-        System.out.println(SERVER_ONLINE + DEFAULT_PORT);
+        System.out.println(SERVER_ONLINE + port);
     }
 
     public void end() throws InterruptedException {

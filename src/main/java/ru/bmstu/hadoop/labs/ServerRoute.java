@@ -45,7 +45,6 @@ public class ServerRoute {
     }
 
     private CompletionStage<Response> sendRequest(Request path) {
-        System.out.println("send url: " + path);
         return httpClient.executeRequest(path).toCompletableFuture();
     }
 
@@ -53,7 +52,6 @@ public class ServerRoute {
         Request result = httpClient.prepareGet("http://" + path)
                 .addQueryParam(URL, url)
                 .addQueryParam(COUNT, String.valueOf(count)).build();
-        System.out.println("result: " + result);
         return result;
     }
 
