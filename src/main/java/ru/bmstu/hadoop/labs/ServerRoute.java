@@ -50,7 +50,7 @@ public class ServerRoute {
     }
 
     private Request buildRequest(String path, String url, int count) {
-        Request result = httpClient.prepareGet(path)
+        Request result = httpClient.prepareGet("http://" + path)
                 .addQueryParam(URL, url)
                 .addQueryParam(COUNT, String.valueOf(count)).build();
         System.out.println("result: " + result);
