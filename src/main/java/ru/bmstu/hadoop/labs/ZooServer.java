@@ -37,6 +37,10 @@ public class ZooServer implements Watcher {
 
     @Override
     public void process(WatchedEvent watchedEvent) {
-        System.out.println(watchedEvent);
+        try {
+            System.out.println(zoo.getChildren(path, false));
+        } catch (KeeperException | InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
