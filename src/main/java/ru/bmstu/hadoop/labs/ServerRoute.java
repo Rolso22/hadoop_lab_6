@@ -47,8 +47,10 @@ public class ServerRoute {
         return httpClient.prepareGet(url).execute().toCompletableFuture();
     }
 
-    private String buildRequest(String url, int count) {
-        
+    private String buildRequest(String path, String url, int count) {
+        httpClient.prepareGet(path)
+                .addQueryParam(URL, url)
+                .addQueryParam(COUNT, String.valueOf(count));
     }
 
     private CompletionStage<Response> sendToServer(String url, int count) {
