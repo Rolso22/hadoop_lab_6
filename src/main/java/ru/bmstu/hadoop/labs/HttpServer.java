@@ -49,7 +49,7 @@ public class HttpServer implements Watcher {
         final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow = serverRoute.createRoute().flow(system, materializer);
         binding = http.bindAndHandle(
                 routeFlow,
-                ConnectHttp.toHost(DEFAULT_HOST, DEFAULT_PORT),
+                ConnectHttp.toHost(host, port),
                 materializer
         );
         System.out.println(SERVER_ONLINE + DEFAULT_PORT);

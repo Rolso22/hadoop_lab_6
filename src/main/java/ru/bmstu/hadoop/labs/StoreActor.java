@@ -21,6 +21,7 @@ public class StoreActor extends AbstractActor {
 
     private void getRandomServer(GetServer get) {
         int randomServer = random.nextInt(serversList.size());
+        System.out.println("server: " + serversList.get(randomServer));
         sender().tell(serversList.get(randomServer), ActorRef.noSender());
     }
 
