@@ -2,9 +2,6 @@ package ru.bmstu.hadoop.labs;
 
 import akka.actor.ActorRef;
 import org.apache.zookeeper.*;
-import org.asynchttpclient.*;
-import static org.asynchttpclient.Dsl.*;
-
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
