@@ -45,7 +45,7 @@ public class ServerRoute {
     }
 
     private CompletionStage<Response> sendRequest(Request path) {
-        System.out.println("send request: " + path.getUrl());
+        System.out.println(SEND_REQUEST + path.getUrl());
         return httpClient.executeRequest(path).toCompletableFuture();
     }
 
