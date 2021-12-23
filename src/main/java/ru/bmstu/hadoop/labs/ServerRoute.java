@@ -18,7 +18,7 @@ import static ru.bmstu.hadoop.labs.Constants.*;
 
 public class ServerRoute {
     private final AsyncHttpClient httpClient = asyncHttpClient();
-    private ActorRef storeActor;
+    private final ActorRef storeActor;
 
     public ServerRoute(ActorRef storeActor) {
         this.storeActor = storeActor;
@@ -45,6 +45,7 @@ public class ServerRoute {
     }
 
     private CompletionStage<Response> sendRequest(Request path) {
+        System.out.println("send request: " + path);
         return httpClient.executeRequest(path).toCompletableFuture();
     }
 
@@ -53,7 +54,7 @@ public class ServerRoute {
                 .addQueryParam(URL, url)
                 .addQueryParam(COUNT, String.valueOf(count)).build();
     }
-    
+
     private CompletionStage<Response> sendToServer(String url, int count) {
         return Patterns.ask(storeActor, new GetServer(), Duration.ofMillis(TIME_OUT_MILLIS))
                 .thenCompose(answer -> sendRequest(buildRequest((String) answer, url, count)));

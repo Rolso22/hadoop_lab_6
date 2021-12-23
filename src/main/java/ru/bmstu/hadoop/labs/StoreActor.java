@@ -20,14 +20,11 @@ public class StoreActor extends AbstractActor {
     }
 
     private void getRandomServer(GetServer get) {
-        System.out.println("all servers: " + serversList);
         int randomServer = random.nextInt(serversList.size());
-        System.out.println("server: " + serversList.get(randomServer));
         sender().tell(serversList.get(randomServer), ActorRef.noSender());
     }
 
     private void putServers(PutServers list) {
-        //System.out.println("list: " + list.getServersList());
         serversList.addAll(list.getServersList());
     }
 
