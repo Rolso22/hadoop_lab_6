@@ -5,6 +5,7 @@ import org.apache.zookeeper.*;
 import org.asynchttpclient.*;
 import static org.asynchttpclient.Dsl.*;
 
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
@@ -16,6 +17,7 @@ public class ZooServer implements Watcher {
     private final int port;
     private final ZooKeeper zoo;
     private final ActorRef storeActor;
+    private ZooKeeper zooKeeper;
 
     public ZooServer(String path, String host, int port, ZooKeeper zoo, ActorRef storeActor) throws InterruptedException, KeeperException {
         this.path = path;
@@ -25,7 +27,11 @@ public class ZooServer implements Watcher {
         this.storeActor = storeActor;
     }
 
-    public void start() throws InterruptedException, KeeperException {
+    public void start() throws InterruptedException, KeeperException, IOException {
+        zooKeeper = new ZooKeeper(DEFAULT_CONNECTION_HOST, TIME_OUT_MILLIS, this);
+        ZooServer zooServer = new ZooServer(SERVER_PATH, host, port, zooKeeper, storeActor);
+        zooServer.start();
+
         zoo.create(path + SLASH + host + COLON + port,
                 (host + COLON + port).getBytes(StandardCharsets.UTF_8),
                 ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL);

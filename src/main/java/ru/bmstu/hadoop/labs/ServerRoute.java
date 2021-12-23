@@ -52,7 +52,8 @@ public class ServerRoute {
     private Request buildRequest(String path, String url, int count) {
         return httpClient.prepareGet(HTTP + path)
                 .addQueryParam(URL, url)
-                .addQueryParam(COUNT, String.valueOf(count)).build();
+                .addQueryParam(COUNT, String.valueOf(count))
+                .build();
     }
 
     private CompletionStage<Response> sendToServer(String url, int count) {

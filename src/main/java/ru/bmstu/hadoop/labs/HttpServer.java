@@ -12,8 +12,6 @@ import akka.http.javadsl.model.HttpResponse;
 import akka.stream.ActorMaterializer;
 import akka.stream.javadsl.Flow;
 import org.apache.zookeeper.KeeperException;
-import org.apache.zookeeper.WatchedEvent;
-import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooKeeper;
 
 import java.io.IOException;
@@ -21,12 +19,10 @@ import java.util.concurrent.CompletionStage;
 
 import static ru.bmstu.hadoop.labs.Constants.*;
 
-public class HttpServer implements Watcher {
-    private String host;
-    private int port;
-    private ActorSystem system;
-    private ActorRef storeActor;
-    private ZooKeeper zooKeeper;
+public class HttpServer {
+    private final String host;
+    private final int port;
+    private final ActorSystem system;
     private CompletionStage<ServerBinding> binding;
 
     public HttpServer(String host, int port) {
@@ -35,15 +31,11 @@ public class HttpServer implements Watcher {
         system = ActorSystem.create("HttpServer");
     }
 
-    public void start() throws IOException, InterruptedException, KeeperException {
-        zooKeeper = new ZooKeeper(DEFAULT_CONNECTION_HOST, TIME_OUT_MILLIS, this);
+    public void start() {
 
         final Http http = Http.get(system);
         final ActorMaterializer materializer = ActorMaterializer.create(system);
-        storeActor = system.actorOf(Props.create(StoreActor.class));
-
-        ZooServer zooServer = new ZooServer(SERVER_PATH, host, port, zooKeeper, storeActor);
-        zooServer.start();
+        ActorRef storeActor = system.actorOf(Props.create(StoreActor.class));
 
         ServerRoute serverRoute = new ServerRoute(storeActor);
         final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow = serverRoute.createRoute().flow(system, materializer);
@@ -55,14 +47,8 @@ public class HttpServer implements Watcher {
         System.out.println(SERVER_ONLINE + port);
     }
 
-    public void end() throws InterruptedException {
-        zooKeeper.close();
+    public void end() {
         binding.thenCompose(ServerBinding::unbind)
                 .thenAccept(unbound -> system.terminate());
-    }
-
-    @Override
-    public void process(WatchedEvent watchedEvent) {
-        System.out.println(watchedEvent.toString());
     }
 }
