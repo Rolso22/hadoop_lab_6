@@ -5,6 +5,7 @@ import akka.http.javadsl.Http;
 import akka.http.javadsl.server.Route;
 import akka.pattern.Patterns;
 import org.asynchttpclient.AsyncHttpClient;
+import org.asynchttpclient.Request;
 import org.asynchttpclient.Response;
 
 import java.time.Duration;
@@ -43,15 +44,15 @@ public class ServerRoute {
         return completeOKWithFutureString(response.thenApply(Response::getResponseBody));
     }
 
-    private CompletionStage<Response> sendRequest(String url) {
+    private CompletionStage<Response> sendRequest(Request url) {
         System.out.println("send url: " + url);
         return httpClient.prepareGet(url).execute().toCompletableFuture();
     }
 
-    private String buildRequest(String path, String url, int count) {
-        String result = httpClient.prepareGet("http://" + path)
+    private Request buildRequest(String path, String url, int count) {
+        Request result = httpClient.prepareGet("http://" + path)
                 .addQueryParam(URL, url)
-                .addQueryParam(COUNT, String.valueOf(count)).toString();
+                .addQueryParam(COUNT, String.valueOf(count)).build();
         System.out.println("result: " + result);
         return result;
     }
