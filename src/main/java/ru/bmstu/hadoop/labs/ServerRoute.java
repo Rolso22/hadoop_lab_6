@@ -47,7 +47,7 @@ public class ServerRoute {
     }
 
     private String buildRequest(String url, int count) {
-        
+
     }
 
     private CompletionStage<Response> sendToServer(String url, int count) {
