@@ -39,7 +39,7 @@ public class ZooServer implements Watcher {
     public void process(WatchedEvent watchedEvent) {
         List<String> serversList = null;
         try {
-            serversList = zoo.getChildren(path, false);
+            serversList = zoo.getChildren(path, this);
         } catch (KeeperException | InterruptedException e) {
             e.printStackTrace();
         }
