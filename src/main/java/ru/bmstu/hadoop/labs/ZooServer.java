@@ -1,10 +1,7 @@
 package ru.bmstu.hadoop.labs;
 
 import akka.actor.ActorRef;
-import org.apache.zookeeper.CreateMode;
-import org.apache.zookeeper.KeeperException;
-import org.apache.zookeeper.ZooDefs;
-import org.apache.zookeeper.ZooKeeper;
+import org.apache.zookeeper.*;
 import org.asynchttpclient.*;
 import static org.asynchttpclient.Dsl.*;
 
@@ -13,7 +10,7 @@ import java.util.List;
 
 import static ru.bmstu.hadoop.labs.Constants.*;
 
-public class ZooServer {
+public class ZooServer implements Watcher {
     private final String path;
     private final String host;
     private final int port;
@@ -38,4 +35,8 @@ public class ZooServer {
         storeActor.tell(new PutServers(serversList), ActorRef.noSender());
     }
 
+    @Override
+    public void process(WatchedEvent watchedEvent) {
+
+    }
 }
