@@ -49,12 +49,11 @@ public class ServerRoute {
     }
 
     private Request buildRequest(String path, String url, int count) {
-        Request result = httpClient.prepareGet("http://" + path)
+        return httpClient.prepareGet(HTTP + path)
                 .addQueryParam(URL, url)
                 .addQueryParam(COUNT, String.valueOf(count)).build();
-        return result;
     }
-
+    
     private CompletionStage<Response> sendToServer(String url, int count) {
         return Patterns.ask(storeActor, new GetServer(), Duration.ofMillis(TIME_OUT_MILLIS))
                 .thenCompose(answer -> sendRequest(buildRequest((String) answer, url, count)));

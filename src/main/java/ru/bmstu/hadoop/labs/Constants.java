@@ -5,6 +5,7 @@ public class Constants {
     public static int TIME_OUT_MILLIS = 3000;
     public static String SERVER_ONLINE = "Server online at http://localhost:";
     public static String URL = "url";
+    public static String HTTP = "http://";
     public static String COUNT = "count";
     public static String SERVER_PATH = "/servers";
     public static String SLASH = "/";
