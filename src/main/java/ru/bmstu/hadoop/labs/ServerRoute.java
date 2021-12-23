@@ -46,7 +46,7 @@ public class ServerRoute {
 
     private CompletionStage<Response> sendRequest(String path) {
         System.out.println("send url: " + path);
-        return httpClient.executeRequest(path).toCompletableFuture();
+        return httpClient.executeRequest(httpClient.prepareGet(path)).toCompletableFuture();
     }
 
     private Request buildRequest(String path, String url, int count) {
