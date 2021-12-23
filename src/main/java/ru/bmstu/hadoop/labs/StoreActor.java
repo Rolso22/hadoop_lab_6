@@ -10,6 +10,7 @@ import java.util.Random;
 public class StoreActor extends AbstractActor {
     private final ArrayList<String> serversList = new ArrayList<>();
     private final Random random = new Random();
+    private final String self;
 
     @Override
     public Receive createReceive() {
@@ -27,5 +28,4 @@ public class StoreActor extends AbstractActor {
     private void putServers(PutServers list) {
         serversList.addAll(list.getServersList());
     }
-
 }
