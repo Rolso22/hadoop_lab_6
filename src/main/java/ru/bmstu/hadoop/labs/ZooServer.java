@@ -15,22 +15,18 @@ public class ZooServer implements Watcher {
     private final String path;
     private final String host;
     private final int port;
-    private final ZooKeeper zoo;
+    private ZooKeeper zoo;
     private final ActorRef storeActor;
-    private ZooKeeper zooKeeper;
 
-    public ZooServer(String path, String host, int port, ZooKeeper zoo, ActorRef storeActor) throws InterruptedException, KeeperException {
+    public ZooServer(String path, String host, int port, ActorRef storeActor) {
         this.path = path;
         this.host = host;
         this.port = port;
-        this.zoo = zoo;
         this.storeActor = storeActor;
     }
 
     public void start() throws InterruptedException, KeeperException, IOException {
-        zooKeeper = new ZooKeeper(DEFAULT_CONNECTION_HOST, TIME_OUT_MILLIS, this);
-        ZooServer zooServer = new ZooServer(SERVER_PATH, host, port, zooKeeper, storeActor);
-        zooServer.start();
+        zoo = new ZooKeeper(DEFAULT_CONNECTION_HOST, TIME_OUT_MILLIS, this);
 
         zoo.create(path + SLASH + host + COLON + port,
                 (host + COLON + port).getBytes(StandardCharsets.UTF_8),

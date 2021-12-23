@@ -31,11 +31,13 @@ public class HttpServer {
         system = ActorSystem.create("HttpServer");
     }
 
-    public void start() {
-
+    public void start() throws IOException, InterruptedException, KeeperException {
         final Http http = Http.get(system);
         final ActorMaterializer materializer = ActorMaterializer.create(system);
         ActorRef storeActor = system.actorOf(Props.create(StoreActor.class));
+
+        ZooServer zooServer = new ZooServer(SERVER_PATH, host, port, storeActor);
+        zooServer.start();
 
         ServerRoute serverRoute = new ServerRoute(storeActor);
         final Flow<HttpRequest, HttpResponse, NotUsed> routeFlow = serverRoute.createRoute().flow(system, materializer);
