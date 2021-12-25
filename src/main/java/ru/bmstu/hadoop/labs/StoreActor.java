@@ -3,6 +3,8 @@ package ru.bmstu.hadoop.labs;
 import akka.actor.AbstractActor;
 import akka.actor.ActorRef;
 import akka.japi.pf.ReceiveBuilder;
+import ru.bmstu.hadoop.labs.Messages.GetRandomServer;
+import ru.bmstu.hadoop.labs.Messages.PutServers;
 
 import java.util.ArrayList;
 import java.util.Random;

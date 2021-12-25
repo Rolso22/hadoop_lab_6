@@ -1,4 +1,4 @@
-package ru.bmstu.hadoop.labs;
+package ru.bmstu.hadoop.labs.Messages;
 
 import java.util.List;
 
