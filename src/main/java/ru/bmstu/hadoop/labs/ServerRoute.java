@@ -40,12 +40,12 @@ public class ServerRoute {
         if (count > 0) {
             response = sendToServer(url, count - 1);
         } else {
-            response = sendRequest(httpClient.prepareGet(url).build());
+            response = sendHttpRequest(httpClient.prepareGet(url).build());
         }
         return completeOKWithFutureString(response.thenApply(Response::getResponseBody));
     }
 
-    private CompletionStage<Response> sendRequest(Request path) {
+    private CompletionStage<Response> sendHttpRequest(Request path) {
         System.out.println(SEND_REQUEST + path.getUrl());
         return httpClient.executeRequest(path).toCompletableFuture();
     }
@@ -59,6 +59,6 @@ public class ServerRoute {
 
     private CompletionStage<Response> sendToServer(String url, int count) {
         return Patterns.ask(storeActor, new GetServer(self_path), Duration.ofMillis(TIME_OUT_MILLIS))
-                .thenCompose(answer -> sendRequest(buildRequest((String) answer, url, count)));
+                .thenCompose(answer -> sendHttpRequest(buildRequest((String) answer, url, count)));
     }
 }
