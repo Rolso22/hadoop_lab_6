@@ -6,7 +6,7 @@ import akka.pattern.Patterns;
 import org.asynchttpclient.AsyncHttpClient;
 import org.asynchttpclient.Request;
 import org.asynchttpclient.Response;
-import ru.bmstu.hadoop.labs.Messages.GetRandomServer;
+import ru.bmstu.hadoop.labs.messages.GetRandomServer;
 
 import java.time.Duration;
 import java.util.concurrent.CompletionStage;

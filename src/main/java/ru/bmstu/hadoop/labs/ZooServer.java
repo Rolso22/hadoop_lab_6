@@ -2,7 +2,7 @@ package ru.bmstu.hadoop.labs;
 
 import akka.actor.ActorRef;
 import org.apache.zookeeper.*;
-import ru.bmstu.hadoop.labs.Messages.PutServers;
+import ru.bmstu.hadoop.labs.messages.PutServers;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
