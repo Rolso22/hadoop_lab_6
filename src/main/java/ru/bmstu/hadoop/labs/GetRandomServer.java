@@ -1,9 +1,9 @@
 package ru.bmstu.hadoop.labs;
 
-public class GetServer {
+public class GetRandomServer {
     private final String self;
 
-    public GetServer(String self) {
+    public GetRandomServer(String self) {
         this.self = self;
     }
 

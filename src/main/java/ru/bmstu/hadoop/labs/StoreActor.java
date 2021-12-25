@@ -14,12 +14,12 @@ public class StoreActor extends AbstractActor {
     @Override
     public Receive createReceive() {
         return ReceiveBuilder.create()
-                .match(GetServer.class, this::getRandomServer)
+                .match(GetRandomServer.class, this::getRandomServer)
                 .match(PutServers.class, this::putServers)
                 .build();
     }
 
-    private void getRandomServer(GetServer get) {
+    private void getRandomServer(GetRandomServer get) {
         String self = get.getSelf();
         int randomServer = random.nextInt(serversList.size());
         while (serversList.get(randomServer).equals(self)) {

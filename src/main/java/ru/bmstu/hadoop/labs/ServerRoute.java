@@ -58,7 +58,7 @@ public class ServerRoute {
     }
 
     private CompletionStage<Response> sendToServer(String url, int count) {
-        return Patterns.ask(storeActor, new GetServer(self_path), Duration.ofMillis(TIME_OUT_MILLIS))
+        return Patterns.ask(storeActor, new GetRandomServer(self_path), Duration.ofMillis(TIME_OUT_MILLIS))
                 .thenCompose(answer -> sendHttpRequest(buildRequest((String) answer, url, count)));
     }
 }
